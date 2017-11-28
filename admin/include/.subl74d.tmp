@@ -1,0 +1,99 @@
+
+          <h1>
+            Tambah Mahasiswa 
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-book"></i> Tambah Mahasiswa</a></li>
+          </ol>
+       
+		<hr>
+
+    <a href="index.php?page=13" class="btn btn-primary btn-lg" style="margin-right:10px;float:right;"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
+
+		<h5><b><?php echo date("l, M Y"); ?></b></h5>
+		<hr>
+
+		<h5><b>Tambah Mahasiswa</b></h5>
+		<p>Berikut ini adalah Form untuk menambah data mahasiswa :
+		</p>
+		<br>
+
+
+
+
+<!-- quick email widget -->
+              <div class="box box-info">
+                <div class="box-header">
+                  <i class="fa fa-book"></i>
+                  <h3 class="box-title">Tambah Mhasiswa</h3>
+                  <?php  
+                   if (isset($_SESSION['pesan']) && $_SESSION['pesan'] != "") {
+                     echo $_SESSION['pesan'];
+                     unset($_SESSION['pesan']);
+                   }else echo "";
+                  ?>
+                </div>
+                <div class="box-body">
+                  
+                    <div class="form-group">
+                      <label for="">ID Matakuliah : </label>
+                      <input type="text" class="form-control" readonly="readonly" name="id_matkul" id="id_matkul" placeholder="ID Matakuliah" value="<?php echo $rows['id_matkul']; ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Nama Matakuliah : </label>
+                      <input type="text" class="form-control" readonly="readonly" name="nm_matkul" id="nm_matkul" placeholder="Nama Matakuliah" value="<?php echo $rows['nm_matkul']; ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Hari : </label>
+                      <select name="hari" id="hari" class="form-control" disabled>
+                        <option value="" disabled selected>-- Pilih Hari --</option>
+                        <option value="Senin" <?php echo $include1; ?>>Senin</option>
+                        <option value="Selasa" <?php echo $include2; ?>>Selasa</option>
+                        <option value="Rabu" <?php echo $include3; ?>>Rabu</option>
+                        <option value="Kamis" <?php echo $include4; ?>>Kamis</option>
+                        <option value="Jumat" <?php echo $include5; ?>>Jumat</option>
+                        <option value="Sabtu" <?php echo $include6; ?>>Sabtu</option>
+                        <option value="Minggu" <?php echo $include7; ?>>Minggu</option>
+                      </select>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="">Jam Mulai : </label>
+                      <input type="time" class="form-control" readonly="readonly" name="jam_mulai" id="jam_mulai" placeholder="Jam Mulai" value="<?php echo $rows['jam_mulai']; ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Jam Selesai : </label>
+                      <input type="time" class="form-control" readonly="readonly" name="jam_selesai" id="jam_selesai" placeholder="Jam Selesai" value="<?php echo $rows['jam_selesai']; ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Ruangan : </label>
+                      <input type="text" class="form-control" readonly="readonly" name="ruang" id="ruang" placeholder="Ruangan" value="<?php echo $rows['ruangan']; ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Dosen Pengajar : </label>
+                      <select name="dosen" id="dosen" class="form-control" disabled>
+                        <option value="" selected disabled>-- Pilih Dosen --</option>
+                        <?php  
+                        $query = mysqli_query($conn,"SELECT * FROM dosen");
+                        if ($query) {
+                          while ($rowss = mysqli_fetch_array($query)) {
+                            $selected = "";
+                            if ($rows['nid'] == $rowss['nid']) {
+                              $selected = "selected";
+                            }
+                        ?>
+                        <option value="<?php echo $rowss['nid']; ?>" <?php echo $selected; ?>><?php echo $rowss['nid']; ?> - <?php echo $rowss['nm_dosen']; ?></option>
+                        <?php                            
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+                    
+                </div>
+                
+              </div>
+
+     
+
